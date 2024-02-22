@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PutText</title>
+  <style>
+            @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Roboto&display=swap');
+            body {
+                font-family: 'Fira Sans', 'Roboto', Sans-Serif;
+                background-color: black;
+                color: white;
+                
+            }
+            
+            .header{
+            
+            }
+            
+  
+            button{
+            	background:none;
+            	color: white;
+            border:none;
+            	border-radius: 20px;
+            padding:10px;
+              transition: 0.1s background;
+            }
+            
+            button:hover{
+            	
+             
+            }
+            
+            button:active{
+            	background-color: lightgrey;
+              color:black;
+              
+            }
+            
+            textarea{
+            	margin-top: 10px;
+            	width: 85%;
+            	height: 500px;
+            	background-color: black;
+            	color: white;
+            	border: 1px solid white;
+            	border-radius: 10px;
+            }
+        </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PutText</h1>
+        <button title="New" id="buttonNewText" onclick="functionNewText()">New</button>
+        <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="functionLoadFromFile(event)">
+        <button title="Open" id="buttonOpenText" onclick="functionOpenText()">Open</button>
+        <button title="Left Align" onclick="functionLeftAlign()">Left Align</button>
+        <button title="Center Align" onclick="functionCenterAlign()">Center Align</button>
+        <button title="Right Align" onclick="functionRightAlign()">Right Align</button>
+        <button title="Upper Case" onclick="functionUpperCase()">Upper Case</button>
+        <button title="Lower Case" onclick="functionLowerCase()">Lower Case</button>
+        <button title="Clear Text" onclick="functionClearText()">Clear Text</button>
+        <button title="Download" onclick="functionDownloadText()">Download</button>
+    </div>
+    <div class="content">
+        <textarea placeholder="Type your text here" id="textareaInputText"></textarea>
+    </div>
+    <script>
+        // JavaScript functions for button clicks
+        function functionNewText() {
+            document.getElementById("textareaInputText").value = "";
+        }
+
+        function functionOpenText() {
+            var fileInput = document.createElement("input");
+            fileInput.type = "file";
+            fileInput.accept = "text/plain";
+            fileInput.style.display = "none";
+
+            fileInput.addEventListener("change", function (event) {
+                var file = event.target.files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById("textareaInputText").value = e.target.result;
+                    };
+                    reader.readAsText(file);
+                }
+            });
+
+            document.body.appendChild(fileInput);
+            fileInput.click();
+            document.body.removeChild(fileInput);
+        }
+
+        function functionLeftAlign() {
+            var textarea = document.getElementById("textareaInputText");
+            textarea.style.textAlign = "left";
+        }
+
+        function functionCenterAlign() {
+            var textarea = document.getElementById("textareaInputText");
+            textarea.style.textAlign = "center";
+        }
+
+        function functionRightAlign() {
+            var textarea = document.getElementById("textareaInputText");
+            textarea.style.textAlign = "right";
+        }
+
+        function functionUpperCase() {
+            var textarea = document.getElementById("textareaInputText");
+            textarea.value = textarea.value.toUpperCase();
+        }
+
+        function functionLowerCase() {
+            var textarea = document.getElementById("textareaInputText");
+            textarea.value = textarea.value.toLowerCase();
+        }
+
+        function functionClearText() {
+            var textarea = document.getElementById("textareaInputText");
+            textarea.value = "";
+        }
+
+        function functionDownloadText() {
+            var textToDownload = document.getElementById("textareaInputText").value;
+            var blob = new Blob([textToDownload], { type: "text/plain" });
+            var url = URL.createObjectURL(blob);
+
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = "text_file.txt";
+            a.textContent = "Download";
+
+            document.body.appendChild(a);
+            a.click();
+
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
+
