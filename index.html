@@ -44,23 +44,18 @@
             	background-color: black;
             	color: white;
             	border: 1px solid white;
-            	border-radius: 10px;
+            	border-radius: 20px;
             }
         </style>
 </head>
 <body>
     <div class="header">
         <h1>PutText</h1>
-        <button title="New" id="buttonNewText" onclick="functionNewText()">New</button>
+        <button title="New" id="buttonNewText" class="newTextButton" onclick="functionNewText()">New</button>
         <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="functionLoadFromFile(event)">
-        <button title="Open" id="buttonOpenText" onclick="functionOpenText()">Open</button>
-        <button title="Left Align" onclick="functionLeftAlign()">Left Align</button>
-        <button title="Center Align" onclick="functionCenterAlign()">Center Align</button>
-        <button title="Right Align" onclick="functionRightAlign()">Right Align</button>
-        <button title="Upper Case" onclick="functionUpperCase()">Upper Case</button>
-        <button title="Lower Case" onclick="functionLowerCase()">Lower Case</button>
-        <button title="Clear Text" onclick="functionClearText()">Clear Text</button>
-        <button title="Download" onclick="functionDownloadText()">Download</button>
+        <button title="Open" id="buttonOpenText" onclick="functionOpenText()" class="openFileButton">Open</button>
+        <button title="Clear Text" onclick="functionClearText()" class="clearTextButton">Clear Text</button>
+        <button title="Download" onclick="functionDownloadText()" class="downloadTextButton">Download as .txt</button>
     </div>
     <div class="content">
         <textarea placeholder="Type your text here" id="textareaInputText"></textarea>
